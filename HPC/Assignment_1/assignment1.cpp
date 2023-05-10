@@ -157,14 +157,14 @@ int main(int argc, char const *argv[])
     start = chrono::high_resolution_clock::now();
     cout << "Breadth First Search: \n";
     g.initialize_visited();
-    g.bfs(4);
+    g.bfs(0);
     cout << endl;
     end = chrono::high_resolution_clock::now();
     cout << "Time taken: "<< chrono::duration_cast<chrono::microseconds>(end - start).count() << " microseconds" << endl;
     start = chrono::high_resolution_clock::now();
     cout << "Parallel Breadth First Search: \n";
     g.initialize_visited();
-    g.parallel_bfs(4);
+    g.parallel_bfs(0);
     cout << endl;
     end = chrono::high_resolution_clock::now();
     cout << "Time taken: " << chrono::duration_cast<chrono::microseconds>(end - start).count() << " microseconds" << endl;
