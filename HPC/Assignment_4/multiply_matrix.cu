@@ -83,10 +83,10 @@ int main(){
 
     initialize_matrix(A,A_rows,A_cols);
     cout << "Matrix 1\n";
-    // print_matrix(A,A_rows,A_cols);
+    print_matrix(A,A_rows,A_cols);
     initialize_matrix(B,B_rows,B_cols);
     cout << "Matrix 2\n";
-    // print_matrix(B,B_rows,B_cols);
+    print_matrix(B,B_rows,B_cols);
 
     cudaMallocManaged(&m1, A_size * sizeof(int));
     cudaMallocManaged(&m2, B_size * sizeof(int));
@@ -113,7 +113,7 @@ int main(){
 
     cudaMemcpy(C,result,C_size*sizeof(int),cudaMemcpyDeviceToHost);
     cout << "GPU result:\n";
-    // print_matrix(C,C_rows,C_cols);
+    print_matrix(C,C_rows,C_cols);
     cout<<"GPU Elapsed time is: "<<gpu_elapsed_time<<" milliseconds"<<endl;
 
     cudaEventCreate(&gpu_start);
@@ -127,7 +127,7 @@ int main(){
     cudaEventDestroy(gpu_stop);
 
     cout << "CPU result:\n";
-    // print_matrix(C,C_rows,C_cols);
+    print_matrix(C,C_rows,C_cols);
     cout<<"CPU Elapsed time is: "<<gpu_elapsed_time<<" milliseconds"<<endl;
 
     cudaFree(m1);

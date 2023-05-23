@@ -1,7 +1,7 @@
 #include<iostream>
 #include<bits/stdc++.h>
 #include<cuda.h>
-#define BLOCK_SIZE 64
+#define BLOCK_SIZE 16
 using namespace std;
 
 void fill_array(int *arr,int size){
@@ -42,10 +42,10 @@ int main(){
 
     fill_array(arr1_cpu,size);
     cout << "Array 1: ";
-    // print_matrix(arr1_cpu,size);
+    print_matrix(arr1_cpu,size);
     fill_array(arr2_cpu,size);
     cout << "Array 2: ";
-    // print_matrix(arr2_cpu,size);
+    print_matrix(arr2_cpu,size);
 
     int *arr1_gpu,*arr2_gpu,*result_gpu;
     
@@ -58,7 +58,7 @@ int main(){
     cudaEvent_t start,stop;
     float elapsedTime;
     
-    dim3 dimGrid(size / BLOCK_SIZE);
+    dim3 dimGrid(size + BLOCK_SIZE - 1 / BLOCK_SIZE);
     dim3 dimBlock(BLOCK_SIZE);
 
     cudaEventCreate(&start);
@@ -73,7 +73,7 @@ int main(){
     cudaEventDestroy(stop);
     cudaMemcpy(result_cpu,result_gpu,size * sizeof(int),cudaMemcpyDeviceToHost);
     cout << "GPU result:\n";
-    // print_matrix(result_cpu,size);
+    print_matrix(result_cpu,size);
     cout<<"Elapsed Time = "<<elapsedTime<<" milliseconds" << endl;
     cudaFree(arr1_gpu);
     cudaFree(arr2_gpu);
@@ -90,7 +90,7 @@ int main(){
     cudaEventDestroy(start);
     cudaEventDestroy(stop);
     cout << "CPU result:\n";
-    // print_matrix(result_cpu,size);
+    print_matrix(result_cpu,size);
     cout<<"Elapsed Time = "<<elapsedTime<<" milliseconds" << endl;
 
     return 0;
